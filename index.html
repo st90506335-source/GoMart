@@ -1,0 +1,594 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>GoMart 快電舖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #0a0b16;
+    --bg-glow-a: rgba(140,123,255,0.16);
+    --bg-glow-b: rgba(255,145,102,0.10);
+    --surface: #12142a;
+    --surface-raised: #191c38;
+    --border: #2a2d52;
+    --border-soft: #20223f;
+    --text: #edeef7;
+    --text-dim: #a7abd1;
+    --text-faint: #6d7096;
+    --accent: #8c7bff;
+    --accent-strong: #b3a4ff;
+    --accent-soft: rgba(140,123,255,0.14);
+    --warm: #ff9166;
+    --warm-soft: rgba(255,145,102,0.14);
+    --ok: #6ee7b7;
+    --caution: #f5b942;
+    --caution-soft: rgba(245,185,66,0.14);
+    --font-body: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: inherit; }
+  ::selection { background: var(--accent-soft); color: var(--text); }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-strong);
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  /* ---- nav ---- */
+  nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(10,11,22,0.78);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; padding-bottom: 14px;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; }
+  .brand-mark {
+    font-family: var(--font-mono); font-weight: 600; font-size: 1rem;
+    color: var(--text);
+  }
+  .brand-sub {
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint);
+    letter-spacing: 0.06em;
+  }
+  .btn {
+    font-family: var(--font-body); font-weight: 700; font-size: 0.88rem;
+    border-radius: 10px; padding: 10px 18px;
+    border: 1px solid transparent; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--warm)); color: #0a0b16; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -8px var(--accent-soft); }
+  .btn-ghost { background: transparent; border-color: var(--border); color: var(--text-dim); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
+  .btn-sm { padding: 8px 14px; font-size: 0.8rem; }
+
+  /* ---- hero ---- */
+  .hero { padding: 76px 0 64px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute; inset: -200px -200px auto auto; width: 560px; height: 560px;
+    background: radial-gradient(circle, var(--bg-glow-a), transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute; inset: auto auto -220px -160px; width: 480px; height: 480px;
+    background: radial-gradient(circle, var(--bg-glow-b), transparent 65%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    font-weight: 900; line-height: 1.28; margin-top: 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent-strong), var(--warm));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lede {
+    margin-top: 20px; font-size: 1.02rem; color: var(--text-dim);
+    max-width: 46ch; line-height: 1.75;
+  }
+  .hero-cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* ---- console mockup ---- */
+  .console {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .console-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .console-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+  .console-title {
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint);
+    margin-left: 8px; letter-spacing: 0.03em;
+  }
+  .console-body { padding: 18px 18px 20px; font-family: var(--font-mono); font-size: 0.8rem; }
+  .console-line {
+    display: flex; gap: 10px; padding: 5px 0; color: var(--text-dim);
+    border-bottom: 1px dashed var(--border-soft);
+  }
+  .console-line:last-child { border-bottom: none; }
+  .console-time { color: var(--text-faint); flex-shrink: 0; }
+  .console-ok { color: var(--ok); }
+  .console-note { color: var(--text-faint); font-size: 0.7rem; padding-top: 12px; }
+  .console-live {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 0.68rem; color: var(--ok);
+    margin-left: auto;
+  }
+  .console-live::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ok);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  /* ---- section shell ---- */
+  section { padding: 72px 0; border-top: 1px solid var(--border-soft); }
+  .section-head { max-width: 62ch; }
+  .section-head h2 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 900; margin-top: 14px;
+  }
+  .section-head p { margin-top: 14px; color: var(--text-dim); font-size: 0.98rem; line-height: 1.75; }
+
+  /* ---- industries ---- */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .chip {
+    font-size: 0.88rem; font-weight: 500;
+    border: 1px solid var(--border); background: var(--surface);
+    border-radius: 999px; padding: 9px 16px;
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-dim);
+  }
+  .chip-caution { border-color: rgba(245,185,66,0.4); color: var(--caution); background: var(--caution-soft); }
+  .chip-flag { font-family: var(--font-mono); font-size: 0.72rem; opacity: 0.85; }
+  .caution-note {
+    margin-top: 16px; font-size: 0.84rem; color: var(--text-faint);
+    border-left: 2px solid var(--caution); padding-left: 12px; line-height: 1.7;
+    max-width: 62ch;
+  }
+
+  /* ---- feature grid ---- */
+  .feature-grid {
+    margin-top: 36px; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .feature-card {
+    background: var(--surface); border: 1px solid var(--border-soft);
+    border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; gap: 14px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .feature-card:hover { border-color: var(--border); transform: translateY(-2px); }
+  .icon-badge {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--accent-soft);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent-strong);
+  }
+  .icon-badge svg { width: 22px; height: 22px; }
+  .feature-card h3 { font-size: 1.03rem; font-weight: 700; }
+  .feature-card p { font-size: 0.87rem; color: var(--text-dim); line-height: 1.7; }
+  .spec-line {
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint);
+    border-top: 1px solid var(--border-soft); padding-top: 12px; margin-top: auto;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---- stat highlight ---- */
+  .stat-highlight {
+    display: flex; align-items: center; gap: 22px; margin-top: 28px;
+    padding: 22px 26px; background: var(--surface); border: 1px solid var(--border-soft);
+    border-radius: 16px; flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: var(--font-mono); font-weight: 700; font-size: 2.75rem; line-height: 1;
+    background: linear-gradient(135deg, var(--accent-strong), var(--warm));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    flex-shrink: 0;
+  }
+  .stat-label { font-size: 0.9rem; color: var(--text-dim); max-width: 42ch; line-height: 1.6; }
+  .stat-label strong { color: var(--text); }
+
+  /* ---- flow (engagement process) ---- */
+  .flow { margin-top: 40px; position: relative; }
+  .flow-rail { position: absolute; left: 19px; top: 8px; bottom: 8px; width: 1px; background: var(--border); }
+  .flow-step { position: relative; padding-left: 56px; padding-bottom: 30px; }
+  .flow-step:last-child { padding-bottom: 0; }
+  .flow-num {
+    position: absolute; left: 0; top: 0; width: 38px; height: 38px; border-radius: 50%;
+    background: var(--surface-raised); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-weight: 600; font-size: 0.85rem; color: var(--accent-strong);
+    z-index: 1;
+  }
+  .flow-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 6px; }
+  .flow-head h3 { font-size: 1rem; font-weight: 700; }
+  .role-tag {
+    font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.03em;
+    padding: 3px 10px; border-radius: 999px; flex-shrink: 0;
+  }
+  .role-you { background: var(--warm-soft); color: var(--warm); }
+  .role-us { background: var(--accent-soft); color: var(--accent-strong); }
+  .role-both { background: var(--border-soft); color: var(--text-dim); }
+  .flow-step p { margin-top: 8px; font-size: 0.87rem; color: var(--text-dim); line-height: 1.7; max-width: 58ch; }
+
+  /* ---- hosting highlight + compare table ---- */
+  .hosting-block {
+    margin-top: 28px; background: var(--surface); border: 1px solid var(--border-soft);
+    border-radius: 16px; padding: 28px; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
+  }
+  .hosting-icon {
+    width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+    background: var(--accent-soft); color: var(--accent-strong);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hosting-icon svg { width: 28px; height: 28px; }
+  .hosting-copy { flex: 1 1 240px; }
+  .hosting-copy h3 { font-size: 1.1rem; font-weight: 800; }
+  .hosting-copy p { margin-top: 10px; font-size: 0.9rem; color: var(--text-dim); line-height: 1.75; max-width: 56ch; }
+
+  .compare-wrap { margin-top: 22px; overflow-x: auto; }
+  .compare-block { min-width: 520px; border: 1px solid var(--border-soft); border-radius: 12px; overflow: hidden; }
+  .compare-row { display: grid; grid-template-columns: 108px 1fr 1fr; }
+  .compare-row + .compare-row { border-top: 1px solid var(--border-soft); }
+  .compare-row > div { padding: 13px 16px; font-size: 0.84rem; }
+  .compare-head { background: var(--surface-raised); }
+  .compare-head > div {
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--text-faint);
+  }
+  .compare-head > div:nth-child(3) { color: var(--accent-strong); }
+  .compare-label { background: var(--surface); color: var(--text-dim); font-weight: 600; }
+  .compare-old { background: var(--surface); color: var(--text-faint); }
+  .compare-us { background: var(--accent-soft); color: var(--text); font-weight: 500; }
+
+  /* ---- tech strip ---- */
+  .tech-strip {
+    margin-top: 16px; display: flex; flex-wrap: wrap; gap: 14px;
+  }
+  .tech-item {
+    flex: 1 1 220px;
+    background: var(--surface); border: 1px solid var(--border-soft); border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .tech-item .label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-faint); letter-spacing: 0.05em; }
+  .tech-item .value { margin-top: 8px; font-weight: 700; font-size: 0.95rem; }
+
+  /* ---- cta ---- */
+  .cta-section { border-top: 1px solid var(--border-soft); position: relative; overflow: hidden; }
+  .cta-section::before {
+    content: ""; position: absolute; inset: -160px -160px auto auto; width: 480px; height: 480px;
+    background: radial-gradient(circle, var(--bg-glow-a), transparent 68%); pointer-events: none;
+  }
+  .cta-box {
+    position: relative;
+    background: var(--surface-raised); border: 1px solid var(--border);
+    border-radius: 20px; padding: 48px; text-align: left;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  }
+  .cta-box h2 { font-size: clamp(1.35rem, 2.4vw, 1.75rem); font-weight: 900; max-width: 32ch; }
+  .cta-box .cta-side { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .cta-note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint); }
+
+  footer { padding: 32px 0 48px; }
+  footer .wrap {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    font-size: 0.78rem; color: var(--text-faint);
+  }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .cta-box { padding: 32px 24px; }
+    .hosting-block { padding: 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-mark">快電舖</span>
+      <span class="brand-sub">GOMART</span>
+    </div>
+    <a class="btn btn-primary btn-sm" href="#contact">預約需求討論</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Fast Ordering Sites · 快速電商訂購系統</span>
+      <h1>你的商品，<em>最快七天</em>就能開賣</h1>
+      <p class="lede">GoMart 快電舖 為電商、分銷、醫美、3C、健康食品等賣家，快速產生一個簡易但完整的訂購網站——庫存賣完自動關閉、每個經銷夥伴都有專屬報價、後台依身分各自登入，全部依你的產業與商品特性量身調整。</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#contact">預約需求討論</a>
+        <a class="btn btn-ghost" href="#capabilities">看核心能力 ↓</a>
+      </div>
+    </div>
+
+    <div class="console">
+      <div class="console-bar">
+        <span class="console-dot"></span><span class="console-dot"></span><span class="console-dot"></span>
+        <span class="console-title">訂單即時動態</span>
+        <span class="console-live">運作中</span>
+      </div>
+      <div class="console-body">
+        <div class="console-line"><span class="console-time">13:04:02</span><span>新訂單成立 #A231 · 商品 SKU-014 · 數量 1</span></div>
+        <div class="console-line"><span class="console-time">13:04:02</span><span class="console-ok">✓ 庫存足夠，已扣庫存，剩餘可訂購 2</span></div>
+        <div class="console-line"><span class="console-time">13:04:55</span><span>庫存比對 SKU-021：目前 3 台 → 更新為 5 台（尚未寫入，待確認）</span></div>
+        <div class="console-line"><span class="console-time">13:05:10</span><span class="console-ok">✓ 確認更新：1 項商品異動，總庫存增加 2 台</span></div>
+        <div class="console-line"><span class="console-time">13:05:41</span><span>推薦碼 REF-1088 新增 1 次瀏覽，累積 214 次</span></div>
+        <div class="console-note">※ 示範畫面，非真實客戶資料</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="industries">
+  <div class="wrap">
+    <span class="eyebrow">Who It's For · 適用對象</span>
+    <div class="section-head">
+      <h2>只要有「特定商品要賣給特定的人」，就適用</h2>
+      <p>不限單一產業。只要商品有規格、有庫存、有分銷或預購需求，我們就能把它包成一頁式訂購站。</p>
+    </div>
+    <div class="chip-row">
+      <span class="chip">電商賣家</span>
+      <span class="chip">直銷 / 分銷體系</span>
+      <span class="chip">零售特賣 / 出清</span>
+      <span class="chip">醫美診所</span>
+      <span class="chip">3C 品牌</span>
+      <span class="chip">健康食品</span>
+      <span class="chip chip-caution">菸酒通路 <span class="chip-flag">※ 需自行符合法規</span></span>
+    </div>
+    <p class="caution-note">菸酒商品涉及《菸酒管理法》等相關規範，年齡驗證與販售資格須由賣家自行確認並負責；GoMart 快電舖僅提供系統技術支援，不代為進行法遵審查。</p>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="wrap">
+    <span class="eyebrow">Core Capabilities · 核心能力</span>
+    <div class="section-head">
+      <h2>不是展示頁，是已經跑過真實訂單的系統</h2>
+      <p>以下每一項都是已經做出來、實際測試過的功能，不是還在畫的大餅。</p>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.6-3 7.9-7 9-4-1.1-7-4.4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        </span>
+        <h3>自動防超賣</h3>
+        <p>就算同時有很多人搶購，系統也會一筆一筆確認庫存，庫存賣完自動關閉，不會發生兩個人搶到同一件貨的狀況。</p>
+        <span class="spec-line">保證：庫存賣完自動關閉，不會賣超</span>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="19" cy="18" r="2.4"/><path d="M7.2 10.8L16.8 7.2M7.2 13.2L16.8 16.8"/></svg>
+        </span>
+        <h3>分銷推薦碼與彈性定價</h3>
+        <p>每個經銷夥伴都有自己的專屬連結跟報價，售價、獎金都能個別設定，誰帶來的業績一目了然。</p>
+        <span class="spec-line">彈性：每組推薦碼可各自訂價、各自算獎金</span>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        </span>
+        <h3>後台分身分管理</h3>
+        <p>總管理員、庫存人員、業務人員各自用自己的帳號登入，各自只看得到自己該看的訂單與資料，不用共用一組密碼。</p>
+        <span class="spec-line">身分：總管理員 ‧ 庫存人員 ‧ 業務人員</span>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="14" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg>
+        </span>
+        <h3>彈性規格與加購</h3>
+        <p>商品規格、分類篩選、加購項目都能依產業客製——服飾尺寸、醫美療程堂數、3C 保固都適用同一套邏輯。</p>
+        <span class="spec-line">篩選：庫存 ‧ 分類 ‧ 價格帶 ‧ 規格</span>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0113.9-5.4M20 12a8 8 0 01-13.9 5.4"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+        </span>
+        <h3>庫存比對與異動報告</h3>
+        <p>批次更新庫存前，系統會先列出真正有變動的項目讓你確認，什麼都還沒改；按下確定才會真的更新，完成後還會自動整理一份異動報告。</p>
+        <span class="spec-line">流程：比對 → 確認 → 報告</span>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>
+        </span>
+        <h3>成效追蹤</h3>
+        <p>每組推薦碼的瀏覽次數、來源、裝置都看得到，分銷成效不用用猜的，用數字說話。</p>
+        <span class="spec-line">追蹤：瀏覽次數 ‧ 來源 ‧ 裝置</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <span class="eyebrow">How We Work · 合作流程</span>
+    <div class="section-head">
+      <h2>從第一次討論到正式上線，流程就這八步</h2>
+      <p>你只需要想清楚第一步（想賣什麼、想怎麼賣），後面的分析、建議、開發我們扛；每一步誰負責，都先講清楚。</p>
+    </div>
+
+    <div class="stat-highlight">
+      <span class="stat-num">7</span>
+      <span class="stat-label"><strong>最快 7 天</strong>，從第一次討論到正式上線接單（實際天數依規格複雜度調整，會在「確定方向」那一步先跟你講清楚）。</span>
+    </div>
+
+    <div class="flow">
+      <div class="flow-rail"></div>
+
+      <div class="flow-step">
+        <span class="flow-num">01</span>
+        <div class="flow-head"><h3>想賣什麼？想怎麼賣？</h3><span class="role-tag role-you">你</span></div>
+        <p>告訴我們想賣的商品、目標客群，大概想怎麼收單（電商、分銷、預購都可以）。這是唯一需要你先想清楚的部分。</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-num">02</span>
+        <div class="flow-head"><h3>幫你分析</h3><span class="role-tag role-us">我們</span></div>
+        <p>評估商品規格、庫存邏輯、分銷需求，找出最適合的訂購流程跟後台設計方式。</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-num">03</span>
+        <div class="flow-head"><h3>提出建議</h3><span class="role-tag role-us">我們</span></div>
+        <p>依分析結果提出具體規劃——頁面長怎樣、後台有哪些身分、定價怎麼設計，讓你能實際評估。</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-num">04</span>
+        <div class="flow-head"><h3>討論</h3><span class="role-tag role-both">雙方</span></div>
+        <p>針對建議來回討論、調整細節，確保方向真的符合你的生意邏輯，不是我們憑空想像的。</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-num">05</span>
+        <div class="flow-head"><h3>確定方向</h3><span class="role-tag role-both">雙方</span></div>
+        <p>雙方確認最終規劃跟預計天數，正式進入實作階段，之後不會再有大方向的更動。</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-num">06</span>
+        <div class="flow-head"><h3>實作</h3><span class="role-tag role-us">我們</span></div>
+        <p>依確定的規劃開發訂購頁與後台，過程中不需要你隨時盯著進度。</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-num">07</span>
+        <div class="flow-head"><h3>驗收</h3><span class="role-tag role-you">你</span></div>
+        <p>你實際操作一遍——下單、改庫存、看後台，確認流程都符合預期，有問題當場調整。</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-num">08</span>
+        <div class="flow-head"><h3>上線</h3><span class="role-tag role-us">我們</span></div>
+        <p>部署到正式環境，帶你熟悉後台操作，正式開始接單。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="wrap">
+    <span class="eyebrow">Under The Hood · 系統基礎</span>
+    <div class="section-head">
+      <h2>不用自架主機，一樣穩</h2>
+      <p>這是 GoMart 快電舖 跟傳統「請人架一個網站」最大的不同——你不用買設備、不用顧機房，也不用擔心系統半夜掛掉沒人處理。</p>
+    </div>
+
+    <div class="hosting-block">
+      <span class="hosting-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0114.9-4H21a3 3 0 010 6h-1"/><path d="M8 16a4 4 0 000 8H16a4 4 0 000-8"/><path d="M12 16v-4"/></svg>
+      </span>
+      <div class="hosting-copy">
+        <h3>整套系統架在雲端服務商的現成基礎上</h3>
+        <p>訂購頁跟後台都跑在大型雲端服務商（Google 的 Firebase）維護的基礎設施上，穩定度跟擴充能力由他們負責，我們專心把系統做好，你專心顧生意。</p>
+      </div>
+    </div>
+
+    <div class="compare-wrap">
+      <div class="compare-block">
+        <div class="compare-row compare-head">
+          <div></div><div>傳統自架主機</div><div>GoMart 快電舖</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-label">前期費用</div><div class="compare-old">要買或租主機、請人架設</div><div class="compare-us">不用買任何設備</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-label">半夜當機</div><div class="compare-old">要有人爬起來處理</div><div class="compare-us">雲端服務商自動接手</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-label">流量暴增</div><div class="compare-old">可能當機，要升級設備</div><div class="compare-us">自動撐住，不用你操心</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-label">維運人力</div><div class="compare-old">要另外請工程師顧著</div><div class="compare-us">不用額外請人</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-strip">
+      <div class="tech-item"><div class="label">上線方式</div><div class="value">設定好就能快速上線</div></div>
+      <div class="tech-item"><div class="label">資料同步</div><div class="value">訂單與庫存即時更新，不會算錯</div></div>
+      <div class="tech-item"><div class="label">維運成本</div><div class="value">沒有主機費用，固定成本低</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>你的商品，下一步就是有一個屬於它的訂購站</h2>
+      <div class="cta-side">
+        <a class="btn btn-primary" href="mailto:hello@gomart.tw">預約需求討論</a>
+        <span class="cta-note">※ 聯絡方式為範例，正式上線前請替換為實際窗口</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>GoMart 快電舖 · 快速上線的客製化電商訂購系統</span>
+    <span>提案草稿 · 内容以實際建置能力為準</span>
+  </div>
+</footer>
+
+</body></html>
