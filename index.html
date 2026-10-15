@@ -40,6 +40,21 @@
 .pfc img{margin:auto;border-radius:6px}
 .pfc h5{font-size:12px;text-align:center;margin-top:6px}
 @media (max-width:860px){.feats{grid-template-columns:1fr}.line{grid-template-columns:repeat(4,1fr)}.line::before{display:none}.pfc .grid{grid-template-columns:repeat(2,1fr)}}
+
+/* hero 3D */
+.hero-3d{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-3d .glow{position:absolute;inset:-40px;pointer-events:none;
+  background:radial-gradient(70% 60% at 50% 55%,rgba(140,123,255,.22),transparent 65%),
+             radial-gradient(55% 45% at 30% 70%,rgba(255,100,200,.14),transparent 60%),
+             radial-gradient(50% 40% at 70% 30%,rgba(255,145,102,.12),transparent 60%)}
+.hero-3d img{position:relative;width:100%;max-width:620px;
+  filter:drop-shadow(0 0 32px rgba(140,123,255,.55)) drop-shadow(0 0 16px rgba(255,100,200,.4));
+  transform:perspective(900px) rotateY(-4deg) rotateX(2deg);transition:transform .4s}
+.hero-3d:hover img{transform:perspective(900px) rotateY(-1deg) rotateX(0) translateY(-4px)}
+@media (prefers-reduced-motion:reduce){.hero-3d img{transition:none}}
+.who-ico{width:130px;margin:auto}
+.feat img{width:auto!important;height:64px}
+.flow .ic img{width:30px;height:30px;object-fit:contain}
 </style></head>
 <body>
 
@@ -61,12 +76,12 @@
       <p>GoMart 快客電站為電商、分銷、醫美、3C、健康食品等賣家，快速產生一個簡易但完整的訂購網站。庫存賣完自動關閉，每個經銷夥伴都有專屬報價，整合身分各自登入，全部依你的產業與商品特性量身調整。</p>
       <div class="btns"><a class="btn btn-p" href="#">預約需求討論 →</a><a class="btn btn-o" href="#">看看核心能力 ↓</a></div>
     </div>
-    <img src="assets/c-hero.png" alt="">
+    <div class="hero-3d"><div class="glow"></div><img src="assets/head1.webp" alt="快客站訂購系統示意圖"></div>
   </div>
   <div class="wrap feats">
-    <div class="card feat"><div class="ico">⚡</div><div><b>快速上線</b><small>最快天天最快七天<br>就能上線開賣</small></div><img src="assets/c-f1.png" alt=""></div>
-    <div class="card feat"><div class="ico">📦</div><div><b>自動防超賣</b><small>庫存即時同步<br>賣完自動關閉下單</small></div><img src="assets/c-f2.png" alt=""></div>
-    <div class="card feat"><div class="ico">⚙️</div><div><b>後台管理</b><small>多角色權限設定<br>輕鬆管理訂單與夥伴</small></div><img src="assets/c-f3.png" alt=""></div>
+    <div class="card feat"><div class="ico">⚡</div><div><b>快速上線</b><small>最快天天最快七天<br>就能上線開賣</small></div><img src="assets/howwework-8.webp" alt=""></div>
+    <div class="card feat"><div class="ico">📦</div><div><b>自動防超賣</b><small>庫存即時同步<br>賣完自動關閉下單</small></div><img src="assets/core-1.webp" alt=""></div>
+    <div class="card feat"><div class="ico">⚙️</div><div><b>後台管理</b><small>多角色權限設定<br>輕鬆管理訂單與夥伴</small></div><img src="assets/core-3.webp" alt=""></div>
   </div>
 </section>
 
@@ -80,9 +95,9 @@
         <p class="lead">不限單一產業。只要商品有規格、有庫存、有分銷或預購需求，我們就能把它包成一頁式訂購站。</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center">
-        <div><img src="assets/a-who1.png" alt="" style="margin:auto"><b>電商賣家</b><div class="lead" style="font-size:12px">品牌電商・團購・網路商店</div></div>
-        <div><img src="assets/a-who2.png" alt="" style="margin:auto"><b>分銷 / 直播團購</b><div class="lead" style="font-size:12px">經銷制度・直播銷售・團主系統</div></div>
-        <div><img src="assets/a-who3.png" alt="" style="margin:auto"><b>醫美診所 / 3C 品牌 / 健康食品</b><div class="lead" style="font-size:12px">預約制・規格選購・特定會員</div></div>
+        <div><img src="assets/for-1.webp" alt="" class="who-ico"><b>電商賣家</b><div class="lead" style="font-size:12px">品牌電商・團購・網路商店</div></div>
+        <div><img src="assets/for-2.webp" alt="" class="who-ico"><b>分銷 / 直播團購</b><div class="lead" style="font-size:12px">經銷制度・直播銷售・團主系統</div></div>
+        <div><img src="assets/for-3.webp" alt="" class="who-ico"><b>醫美診所 / 3C 品牌 / 健康食品</b><div class="lead" style="font-size:12px">預約制・規格選購・特定會員</div></div>
       </div>
     </div>
     <div class="chips">
@@ -98,12 +113,12 @@
     <h2>不是展示頁，是已經跑過真實訂單的系統</h2>
     <p class="lead">以下每一項都是已經做出來、實際測試過的功能，不是還在畫的大餅。</p>
     <div class="caps">
-      <div class="card cap c"><img src="assets/c-cap1.png" alt=""><div><h3>🛡️ 自動防超賣</h3><p>就算同時有很多人搶購，系統也會一筆一筆確認庫存，庫存賣完自動關閉，不會發生兩個人搶到同一件的狀況。</p><div class="foot">保證：庫存賣完自動關閉，不會賣超</div></div></div>
-      <div class="card cap c"><img src="assets/c-cap2.png" alt=""><div><h3>🔗 分銷推廣碼與彈性定價</h3><p>每個經銷夥伴都有自己的專屬連結與報價，售價、獎金都能個別設定，讓帶來的業績一目了然。</p><div class="foot">彈性：每個推廣碼可各自訂價、各自算獎金</div></div></div>
-      <div class="card cap c"><img src="assets/c-cap3.png" alt=""><div><h3>👤 後台分身分管理</h3><p>總管理員、庫存人員、業務人員各自用自己的帳號登入，各自只看到自己該看的訂單與資料，不用共用一組密碼。</p><div class="foot">身分：總管理員・庫存人員・業務人員</div></div></div>
-      <div class="card cap c"><img src="assets/c-cap4.png" alt=""><div><h3>📦 彈性規格與加購</h3><p>商品規格、分類篩選、加購項目都能依產業客製——服飾尺寸、醫美療程堂數、3C 保固都適用同一套邏輯。</p><div class="foot">商品：庫存・分類・價格帶・規格</div></div></div>
-      <div class="card cap c"><img src="assets/c-cap5.png" alt=""><div><h3>📄 庫存比對與異動報告</h3><p>批次更新庫存前，系統會先列出真正有變動的項目請你確認，什麼都沒改，按下確定才會真的更新，完成後還會自動整理一份異動報告。</p><div class="foot">流程：比對・確認・報告</div></div></div>
-      <div class="card cap c"><img src="assets/c-cap6.png" alt=""><div><h3>📊 成效追蹤</h3><p>每個推廣碼的瀏覽次數、來源、裝置都有得到，分銷成效不用再猜，用數字說話。</p><div class="foot">追蹤：瀏覽次數・來源・裝置</div></div></div>
+      <div class="card cap c"><img src="assets/core-1.webp" alt=""><div><h3>🛡️ 自動防超賣</h3><p>就算同時有很多人搶購，系統也會一筆一筆確認庫存，庫存賣完自動關閉，不會發生兩個人搶到同一件的狀況。</p><div class="foot">保證：庫存賣完自動關閉，不會賣超</div></div></div>
+      <div class="card cap c"><img src="assets/core-2.webp" alt=""><div><h3>🔗 分銷推廣碼與彈性定價</h3><p>每個經銷夥伴都有自己的專屬連結與報價，售價、獎金都能個別設定，讓帶來的業績一目了然。</p><div class="foot">彈性：每個推廣碼可各自訂價、各自算獎金</div></div></div>
+      <div class="card cap c"><img src="assets/core-3.webp" alt=""><div><h3>👤 後台分身分管理</h3><p>總管理員、庫存人員、業務人員各自用自己的帳號登入，各自只看到自己該看的訂單與資料，不用共用一組密碼。</p><div class="foot">身分：總管理員・庫存人員・業務人員</div></div></div>
+      <div class="card cap c"><img src="assets/core-4.webp" alt=""><div><h3>📦 彈性規格與加購</h3><p>商品規格、分類篩選、加購項目都能依產業客製——服飾尺寸、醫美療程堂數、3C 保固都適用同一套邏輯。</p><div class="foot">商品：庫存・分類・價格帶・規格</div></div></div>
+      <div class="card cap c"><img src="assets/core-5.webp" alt=""><div><h3>📄 庫存比對與異動報告</h3><p>批次更新庫存前，系統會先列出真正有變動的項目請你確認，什麼都沒改，按下確定才會真的更新，完成後還會自動整理一份異動報告。</p><div class="foot">流程：比對・確認・報告</div></div></div>
+      <div class="card cap c"><img src="assets/core-6.webp" alt=""><div><h3>📊 成效追蹤</h3><p>每個推廣碼的瀏覽次數、來源、裝置都有得到，分銷成效不用再猜，用數字說話。</p><div class="foot">追蹤：瀏覽次數・來源・裝置</div></div></div>
     </div>
   </div>
 </section>
@@ -115,14 +130,14 @@
     <h2>從第一次討論到正式上線，流程就這八步</h2>
     <p class="lead">你只需要想清楚第一步（想賣什麼、想怎麼賣），後面的分析、建議、開發我們扛，每一步都有專人幫你講清楚。</p>
     <div class="flow">
-      <div><div class="ic">💬</div><h4><em>01</em>想賣什麼？想怎麼賣？</h4><p>告訴我們商品和目標客群</p></div>
-      <div><div class="ic">📄</div><h4><em>02</em>幫你分析</h4><p>評估商品規格與分銷需求</p></div>
-      <div><div class="ic">💡</div><h4><em>03</em>提出建議</h4><p>給出最適合的訂購流程與設計</p></div>
-      <div><div class="ic">👥</div><h4><em>04</em>討論</h4><p>調整細節，確認合作方向</p></div>
-      <div><div class="ic">🎯</div><h4><em>05</em>確定方向</h4><p>確認規格與時程，正式進入製作</p></div>
-      <div><div class="ic">&lt;/&gt;</div><h4><em>06</em>實作</h4><p>進行開發與後台設定</p></div>
-      <div><div class="ic">✔️</div><h4><em>07</em>驗收</h4><p>測試操作、確認流程符合預期</p></div>
-      <div><div class="ic">🚀</div><h4><em>08</em>上線</h4><p>部署正式環境，開始接單</p></div>
+      <div><div class="ic"><img src="assets/howwework-1.webp" alt=""></div><h4><em>01</em>想賣什麼？想怎麼賣？</h4><p>告訴我們商品和目標客群</p></div>
+      <div><div class="ic"><img src="assets/howwework-2.webp" alt=""></div><h4><em>02</em>幫你分析</h4><p>評估商品規格與分銷需求</p></div>
+      <div><div class="ic"><img src="assets/howwework-3.webp" alt=""></div><h4><em>03</em>提出建議</h4><p>給出最適合的訂購流程與設計</p></div>
+      <div><div class="ic"><img src="assets/howwework-4.webp" alt=""></div><h4><em>04</em>討論</h4><p>調整細節，確認合作方向</p></div>
+      <div><div class="ic"><img src="assets/howwework-5.webp" alt=""></div><h4><em>05</em>確定方向</h4><p>確認規格與時程，正式進入製作</p></div>
+      <div><div class="ic"><img src="assets/howwework-6.webp" alt=""></div><h4><em>06</em>實作</h4><p>進行開發與後台設定</p></div>
+      <div><div class="ic"><img src="assets/howwework-7.webp" alt=""></div><h4><em>07</em>驗收</h4><p>測試操作、確認流程符合預期</p></div>
+      <div><div class="ic"><img src="assets/howwework-8.webp" alt=""></div><h4><em>08</em>上線</h4><p>部署正式環境，開始接單</p></div>
     </div>
   </div>
 </section>
@@ -134,7 +149,7 @@
     <h2>不用自架主機，一樣穩</h2>
     <p class="lead">這是 GoMart 快電舖跟傳統「請人架一個網站」最大的不同，你不用買設備、不用顧機房，也不用擔心系統半夜當掉沒人處理。</p>
     <div class="split" style="display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center;margin-top:20px">
-      <img src="assets/b-hood.png" alt="">
+      <img src="assets/cloud.webp" alt="" style="max-width:460px;margin:auto">
       <table class="cmp">
         <tr><th></th><th>傳統自行主機</th><th>GOMART 快電舖</th></tr>
         <tr><td>前期費用</td><td>要買或租主機，請人架設</td><td>不用買任何設備</td></tr>
@@ -173,7 +188,7 @@
     <div class="cta">
       <h2>你的商品，下一步就是<br><span class="grad">有一個屬於它的訂購站</span></h2>
       <div><a class="btn btn-p" href="#">預約需求討論 →</a><div class="note">※ 聯絡方式為範例，正式上線前請替換為實際窗口。</div></div>
-      <img src="assets/b-cta.png" alt="">
+      <img src="assets/footer-1.webp" alt="">
     </div>
     <div class="foot-bar"><span><img src="assets/logo.png" alt="快客站" class="logo-sm">快速上線的客製化電商訂購系統</span><span>隱私權政策｜服務條款｜聯絡我們</span></div>
   </div>
